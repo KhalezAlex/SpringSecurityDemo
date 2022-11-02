@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="UTF-8">
+    <title>request</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="div_lists">
+        <p th:each="cat:${list}" th:text="${cat}"></p>
+    </div>
+
+    <form th:if="${isAdmin}" action="/request" method="get">
+        <input type="text" name="category" value="comedy">
+        <input type="submit" value="add">
+    </form>
+
+    <form th:if="${isAdmin}" action="/delete" method="get">
+        <p>delete</p>
+        <input type="text" name="category">
+        <input type="submit" value="delete">
+    </form>
+
+    <form th:if="${isAdmin}" action="/update" method="get">
+        <p>update</p>
+        <input type="text" name="formCat">
+        <input type="text" name="futCat">
+        <input type="submit" value="update">
+    </form>
+
+    <div class="div_lists" th:if="${isAdmin}">
+        <p th:each="cat:${suggestList}" th:text="${cat}"></p>
+    </div>
+
+    <form th:if="!${isAdmin}" action="/suggest" method="get">
+        <p>suggest</p>
+        <input type="text" name="suggest">
+        <input type="submit" value="suggest">
+    </form>
+
+    <form th:if="${isAdmin}" action="/accept" method="get">
+        <p>accept suggest category</p>
+        <input type="text" name="suggest">
+        <input type="submit" value="accept">
+    </form>
+</body>
+</html>
